@@ -1,0 +1,21 @@
+package com.mxs.sampleservice.web;
+
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Controller;
+
+/**
+ * <p>
+ * 样本操作记录表 前端控制器
+ * </p>
+ *
+ * @author zhangyingxuan
+ * @since 2019-08-02
+ */
+@Controller
+@RequestMapping("/sampleOperateRecord")
+public class SampleOperateRecordController {
+
+}
+

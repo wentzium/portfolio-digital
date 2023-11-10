@@ -1,0 +1,5 @@
+keytool -genkeypair -alias mxs-jwt -validity 3650 -keyalg RSA -dname "CN=jwt,OU=jtw,O=jwt,L=zurich,S=zurich,C=CH" -keypass mxs123456 -keystore mxs-jwt.jks -storepass mxs123123456
+
+
+keytool -list -rfc --keystore mxs-jwt.jks | openssl x509 -inform pem -pubkey
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mxs.sampleservice.mapper.SampleMapper">
+    <select id="selectListForFixSite" resultType="com.mxs.sampleservice.bo.SampleListForFixSiteBO">
+        SELECT b.patient_no as patientNo,b.name as patientName,a.sample_no as sampleNo,a.num,
+        DATE_FORMAT(a.separation_time,'%Y-%m-%d %H:%i:%s') as separationTime,
+        DATE_FORMAT(a.fix_at,'%Y-%m-%d %H:%i:%s') as fixedTime,
+        a.operation_site_operator as operationOperator,
+        a.fixed_status as fixedStatus
+        FROM t_sample a LEFT JOIN t_patient_info b ON a.patient_no = b.patient_no
+        WHERE a.flow_status = 1 or (a.flow_status = 2 and a.logistics_status = 0)
+        <if test="condition.applyNo != null and condition.applyNo != ''">
+            AND a.apply_no = #{condition.applyNo}
+        </if>
+    </select>
+</mapper>

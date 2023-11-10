@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mxs.sampleservice.mapper.DicMapper">
+    <select id="selectByCondition" resultType="com.mxs.sampleservice.bo.admin.AdminDicValueBO">
+        SELECT
+        a.id AS dicId,
+        a.item_code AS dicCode,
+        a.item_name AS dicDesc,
+        b.id,
+        b.item_code AS `CODE`,
+        b.item_name AS `DESC`,
+        b.is_default AS defaultShow
+        FROM
+        t_dic a
+        INNER JOIN t_dic_item b ON a.id = b.dic_id
+        WHERE b.is_deleted = 0
+        <if test="condition.keyName != null and condition.keyName != ''">
+            AND a.item_name LIKE concat('%',#{condition.keyName},'%')
+        </if>
+    </select>
+</mapper>
